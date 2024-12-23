@@ -24,6 +24,7 @@ If these commands return a version number, Node.js and npm are installed. Otherw
    ```
 2. Install dependencies:
    ```bash
+   cd homeconnect-profile-downloader
    npm install
    ```
 3. Start the application:
