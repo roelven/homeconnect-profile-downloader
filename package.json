@@ -1,0 +1,29 @@
+{
+  "name": "homeconnect-profile-downloader",
+  "version": "0.0.1",
+  "description": "This tool fetches profile information for all Home Connect devices linked to your account, enabling direct communication with your appliances over the local network.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "author": "Jonas Brüstel",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.6.0",
+    "@electron-forge/maker-deb": "^7.6.0",
+    "@electron-forge/maker-rpm": "^7.6.0",
+    "@electron-forge/maker-squirrel": "^7.6.0",
+    "@electron-forge/maker-zip": "^7.6.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
+    "@electron-forge/plugin-fuses": "^7.6.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^33.2.1"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "electron-squirrel-startup": "^1.0.1",
+    "jszip": "^3.10.1"
+  }
+}

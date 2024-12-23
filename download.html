@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
+  <title>Loading</title>
+</head>
+
+<body>
+  <h1>Home Connect Profile Downloader</h1>
+  <h2>profiles-homeconnectdirect</h2>
+  <p id="profile-path"></p>
+  <ul id="zip-list">
+
+  </ul>
+
+  <hr />
+  <br />
+  <a href="index.html">Back</a>
+
+  <script>
+    async function loadZipFiles() {
+      const zipFiles = await window.api.getZipFiles();
+      const zipList = document.getElementById('zip-list');
+
+      zipFiles.forEach(file => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.textContent = file;
+        link.href = `profiles-homeconnectdirect/${file}`;
+        listItem.appendChild(link);
+        zipList.appendChild(listItem);
+      });
+    }
+
+    async function displayProfilePath() {
+      const profilePath = await window.api.getProfilePath();
+      document.getElementById('profile-path').textContent = profilePath;
+    }
+
+    displayProfilePath();
+    loadZipFiles();
+  </script>
+
+</body>
+
+</html>

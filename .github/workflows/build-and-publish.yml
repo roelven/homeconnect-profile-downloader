@@ -1,0 +1,58 @@
+name: Build Electron App
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.config.os }}
+
+    strategy:
+      matrix:
+        config:
+          - { os: ubuntu-latest, arch: x64 }
+          - { os: ubuntu-latest, arch: arm64 }
+          - { os: macos-latest, arch: arm64 }
+          - { os: windows-latest, arch: x64 }
+          - { os: windows-latest, arch: arm64 }
+        node-version: [16]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Package Electron app
+        run: npm run package
+
+      - name: Build Application (non macOS)
+        if: runner.os != 'macOS'
+        run: npm run make -- --arch=${{ matrix.config.arch }}
+
+      - name: Upload artifacts (non macOS)
+        if: runner.os != 'macOS'
+        uses: actions/upload-artifact@v3
+        with:
+          name: home-connect-profile-downloader-${{ runner.os }}-${{ matrix.config.arch }}
+          path: out/make/
+
+      - name: Build Application (Universal macOS)
+        if: runner.os == 'macOS'
+        run: npx electron-builder --dir --mac --universal
+
+      - name: Upload artifacts (Universal macOS)
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v3
+        with:
+          name: home-connect-profile-downloader-${{ runner.os }}
+          path: dist/mac-universal
+
