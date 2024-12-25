@@ -65,7 +65,7 @@ const createWindow = () => {
   Menu.setApplicationMenu(menu);
 
   ipcMain.handle('get-zip-files', async () => {
-    const downloadsFolder = path.join(__dirname, "profiles-homeconnectdirect");
+    const downloadsFolder = path.join(app.getPath('userData'), "profiles-homeconnectdirect");
     try {
       const files = fs.readdirSync(downloadsFolder);
       const zipFiles = files
@@ -86,7 +86,7 @@ const createWindow = () => {
   });
 
   ipcMain.handle('get-profile-path', async () => {
-    return path.join(__dirname, "profiles-homeconnectdirect");
+    return path.join(app.getPath('userData'), "profiles-homeconnectdirect");
   });
 
   ipcMain.on('form-submitted', (event, data) => {
@@ -290,7 +290,7 @@ async function getApplianceInformation(url, accessToken) {
 
 async function loadZip(urlPrefix, accessToken, targetDirectory, profile) {
   try {
-    const folderPath = path.join(__dirname, targetDirectory);
+    const folderPath = path.join(app.getPath('userData'), targetDirectory);
     if (!fs.existsSync(folderPath)) {
       fs.mkdirSync(folderPath, { recursive: true });
       console.log(`Created target directory: ${folderPath}`);
