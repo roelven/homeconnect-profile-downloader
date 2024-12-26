@@ -206,11 +206,15 @@ async function getDeviceInformation(tokenUrl, code, codeVerifier, accountDetails
   const profiles = [];
   for (const appliance of homeAppliances) {
     console.log(`haId: ${appliance.identifier}, type: ${appliance.type}, serialNumber: ${appliance.serialnumber}`);
+    console.log(`appliance: ${JSON.stringify(appliance, null, 2)}`);
 
     const profile = {
       haId: appliance.identifier,
       type: appliance.type,
       serialNumber: appliance.serialnumber,
+      brand: appliance.brand,
+      vib: appliance.vib,
+      mac: appliance.mac,
       featureMappingFileName: appliance.identifier + "_FeatureMapping.xml",
       deviceDescriptionFileName: appliance.identifier + "_DeviceDescription.xml",
       created: generateTimestamp()
@@ -296,8 +300,17 @@ async function loadZip(urlPrefix, accessToken, targetDirectory, profile) {
       console.log(`Created target directory: ${folderPath}`);
     }
 
-    const now = Date.now();
-    const zipFilePath = path.join(folderPath, profile.haId + '_' + now + '.zip');
+    const now = new Date();
+    const type = profile.type
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .toLowerCase();
+    const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}`;
+    const brand = profile.brand.toLowerCase();
+    const vib = profile.vib.toLowerCase();
+    const mac = profile.mac.replace(/-/g, '').toLowerCase();
+
+    const zipFilePath = path.join(folderPath,
+      `homeconnectdirect-${type}-${brand}-${vib}-${mac}_${formattedDate}.zip`);
     const headers = {
       'Authorization': 'Bearer ' + accessToken
     };
@@ -313,9 +326,9 @@ async function loadZip(urlPrefix, accessToken, targetDirectory, profile) {
 
     const modifiedZipContent = await zip.generateAsync({ type: 'nodebuffer' });
     fs.writeFileSync(zipFilePath, modifiedZipContent);
-  
+
     console.log(`Modified ZIP saved: ${zipFilePath}`);
-  
+
     return zipFilePath;
   } catch (error) {
     console.error('Could not load or write profile zip:', error.message);
