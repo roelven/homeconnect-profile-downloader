@@ -10,21 +10,37 @@ module.exports = {
     {
       name: '@electron-forge/maker-zip',
       platforms: ['win32', 'darwin'],
+      config: {
+        name: "Home Connect Profile Downloader",
+      },
     },
     {
       name: '@reforged/maker-appimage',
       platforms: ['linux'],
-      config: {},
+      config: {
+        productName: "Home Connect Profile Downloader",
+        homepage: "https://github.com/bruestel/homeconnect-profile-downloader",
+      },
     },
     {
       name: '@electron-forge/maker-deb',
       platforms: ['linux'],
-      config: {},
+      config: {
+        options: {
+          productName: "Home Connect Profile Downloader",
+          homepage: "https://github.com/bruestel/homeconnect-profile-downloader",
+        },
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
       platforms: ['linux'],
-      config: {},
+      config: {
+        options: {
+          productName: "Home Connect Profile Downloader",
+          homepage: "https://github.com/bruestel/homeconnect-profile-downloader",
+        },
+      },
     },
   ],
   plugins: [

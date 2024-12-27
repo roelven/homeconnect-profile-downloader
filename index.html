@@ -5,37 +5,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
+  <link rel="stylesheet" href="style.css">
   <title>Home Connect Profile Downloader</title>
 </head>
 
 <body>
-  <h1>Home Connect Profile Downloader</h1>
+  <main>
+    <h1>Home Connect Profile Downloader</h1>
 
-  <form id="form">
-    <div>
-      <label for="region">Region:</label>
-      <select id="region">
-        <option value="EU" selected>Europe</option>
-        <option value="NA">North America</option>
-        <option value="CN">Greater China</option>
-      </select>
-    </div>
-    <div>
-      <label for="target">Target:</label>
-      <select id="target">
-        <option value="homeconnectdirect" selected>openHAB - Home Connect Direct Binding</option>
-        <option value="hcpy" disabled>hcpy</option>
-      </select>
-    </div>
-    <div>
+    <form id="form">
+      <div>
+        <label for="region">Region:</label>
+        <select id="region">
+          <option value="EU" selected>Europe</option>
+          <option value="NA">North America</option>
+          <option value="CN">Greater China</option>
+        </select>
+      </div>
+      <div>
+        <label for="target">Target:</label>
+        <select id="target">
+          <option value="homeconnectdirect" selected>openHAB - Home Connect Direct Binding</option>
+          <option value="hcpy" disabled>hcpy</option>
+        </select>
+      </div>
+      <div>
 
-      <button type="button" id="submit">Fetch appliance profile data</button>
-    </div>
-  </form>
+        <button type="button" id="submit">Fetch appliance profile data</button>
+      </div>
+    </form>
 
-  <hr />
-  <br />
-  <a href="download.html">Previous downloads</a>
+    <hr />
+    <br />
+    <a href="download.html">Previous downloads</a>
+  </main>
+
 
   <script>
     document.getElementById('submit').addEventListener('click', () => {

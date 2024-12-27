@@ -6,6 +6,8 @@ const axios = require('axios');
 const fs = require('fs');
 const JSZip = require('jszip');
 
+app.commandLine.appendSwitch('password-store', 'basic');
+app.commandLine.appendSwitch('disable-features', 'NativeNotifications');
 
 let mainWindow;
 
@@ -25,7 +27,7 @@ let target;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 768,
+    width: 900,
     height: 768,
     webPreferences: {
       sandbox: true,

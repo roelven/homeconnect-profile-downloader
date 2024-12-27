@@ -29,9 +29,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      #- name: Install fetch
-      #  run: npm install node-fetch
-
       - name: Package Electron app
         run: npm run package:all
 
@@ -39,7 +36,7 @@ jobs:
         run: npm run make:all
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: home-connect-profile-downloader-${{ runner.os }}
           path: out/make/
