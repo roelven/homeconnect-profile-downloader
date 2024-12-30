@@ -2,13 +2,15 @@
 
 This tool fetches profile information for all Home Connect devices linked to your account, enabling direct communication with your appliances over the local network.
 
+![Screenshot Home Connect Profile Downloader UI](doc/screenshot.png "Main UI")
+
 ## Why Use This Tool?
 
 With the gathered profile information, you can directly communicate with your Home Connect devices within your home network. This is particularly useful for integrations such as the [Home Connect Direct binding for openHAB](https://community.openhab.org/t/home-connect-direct-binding-no-cloud/160857/36).
 
 ## Run it
 
-> **Note:** Please ensure you download the correct package file for your system architecture. Use files labeled `amd64` or `x64` for 64-bit x86 systems, and files labeled `arm64` for 64-bit ARM-based systems.
+> **Note:** Please ensure you download the correct package file for your system architecture. Use files labeled `amd64`, `x86_64` or `x64` for 64-bit x86 systems, and files labeled `arm64` for 64-bit ARM-based systems.
 
 ### On Linux
 
@@ -51,7 +53,7 @@ The AppImage format allows you to run the application without installation. It i
 
 To install and run the application on Windows, follow these steps:
 
-1. Download the ZIP file
+1. Download the ZIP file (e.g. `homeconnect-profile-downloader-win32-x64-0.9.0.zip`)
 2. Extract the ZIP file  
    - Navigate to the location where the `.zip` file was downloaded.
    - Right-click on the `.zip` file and select **Extract All...**.
