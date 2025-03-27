@@ -1,0 +1,7 @@
+services:
+  macos-packager:
+    build:
+      context: .
+      dockerfile: Dockerfile.macos-package
+    volumes:
+      - ./out:/app/out

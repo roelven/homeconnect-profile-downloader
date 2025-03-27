@@ -71,7 +71,35 @@ To install and run the application on Windows, follow these steps:
 
 ### On Mac OS
 
-Unfortunately, there are no pre-built macOS binaries available due to restrictions on running unsigned applications. However, you can build and run the application locally by following these steps:
+There are multiple ways to run the application on macOS:
+
+#### Option 1: Use Docker to prepare a macOS build package (Recommended)
+
+This approach uses Docker to create a ready-to-build package that can be easily built on macOS:
+
+1. On any system with Docker installed, run:
+   ```bash
+   git clone https://github.com/bruestel/homeconnect-profile-downloader.git
+   cd homeconnect-profile-downloader
+   ./build-macos.sh
+   ```
+
+2. Copy the generated `./out/build/homeconnect-profile-downloader-macos-package.tar.gz` to your Mac
+
+3. On your Mac, extract and build:
+   ```bash
+   tar -xzvf homeconnect-profile-downloader-macos-package.tar.gz
+   cd homeconnect-app
+   ./build-macos.sh
+   ```
+
+4. The built app will be in the `out/` directory
+   
+5. Move the .app file to your Applications folder. The first time you run it, right-click and select "Open"
+
+#### Option 2: Build locally from scratch
+
+You can also build and run the application directly on macOS by following these steps:
 
 1. Install Node.js and npm  
    - Ensure you have Homebrew installed on your system. If not, install it by following the instructions at [brew.sh](https://brew.sh).

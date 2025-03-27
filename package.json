@@ -8,7 +8,8 @@
     "package": "electron-forge package",
     "package:all": "npm run package -- --arch=x64 && npm run package -- --arch=arm64",
     "make": "electron-forge make",
-    "make:all": "npm run make -- --arch=x64 && npm run make -- --arch=arm64"
+    "make:all": "npm run make -- --arch=x64 && npm run make -- --arch=arm64",
+    "package:docker": "docker-compose build && docker-compose up"
   },
   "author": "Jonas Brüstel",
   "license": "MIT",

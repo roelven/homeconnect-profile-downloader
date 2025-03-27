@@ -1,0 +1,21 @@
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./out:/app/out
+      - ./.electron-gyp:/root/.electron-gyp
+      - ./.cache:/root/.cache
+    environment:
+      - USE_SYSTEM_SANDBOX=false
+      - DEBUG=electron-builder
+      - ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true
+      - npm_config_target_arch=x64
+      - npm_config_target_platform=darwin
+      - npm_config_platform=darwin
+      - FORCE_COLOR=1
+      # Special flags to enable cross-compiling for macOS
+      - npm_config_target_libc=darwin
+      # Enable verbose output for debugging
+      - npm_config_loglevel=verbose

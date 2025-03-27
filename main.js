@@ -31,9 +31,24 @@ const createWindow = () => {
     height: 768,
     webPreferences: {
       sandbox: true,
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      // Enable context isolation but also enable basic clipboard operations
+      contextIsolation: true,
+      spellcheck: true
     }
   })
+  
+  // Enable context menu for copy/paste operations
+  mainWindow.webContents.on('context-menu', (e, params) => {
+    const contextMenu = Menu.buildFromTemplate([
+      { role: 'cut', enabled: params.editFlags.canCut },
+      { role: 'copy', enabled: params.editFlags.canCopy },
+      { role: 'paste', enabled: params.editFlags.canPaste },
+      { type: 'separator' },
+      { role: 'selectAll', enabled: params.editFlags.canSelectAll }
+    ]);
+    contextMenu.popup();
+  });
 
   mainWindow.loadFile('index.html');
 
@@ -51,6 +66,18 @@ const createWindow = () => {
         { type: 'separator' },
         { label: 'Quit', role: 'quit' },
       ],
+    },
+    {
+      label: 'Edit',
+      submenu: [
+        { label: 'Undo', accelerator: 'CmdOrCtrl+Z', role: 'undo' },
+        { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', role: 'redo' },
+        { type: 'separator' },
+        { label: 'Cut', accelerator: 'CmdOrCtrl+X', role: 'cut' },
+        { label: 'Copy', accelerator: 'CmdOrCtrl+C', role: 'copy' },
+        { label: 'Paste', accelerator: 'CmdOrCtrl+V', role: 'paste' },
+        { label: 'Select All', accelerator: 'CmdOrCtrl+A', role: 'selectAll' }
+      ]
     },
     {
       label: 'View',
